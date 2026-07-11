@@ -1,0 +1,21 @@
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: codenatics_postgres
+    environment:
+      POSTGRES_DB: codenatics_catalog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "Qhawe&Khanyisa_"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:var/lib/postgresql/data
+    entrypoint:
+      - sh
+      - c
+      - |
+        echo "CREATE DATABASE product_catalog;" > /docker-entrypoint-init.sql
+        exec /usr/local/bin/docker-entrypoint.sh postgres
+
+volumes:
+  pgdata:

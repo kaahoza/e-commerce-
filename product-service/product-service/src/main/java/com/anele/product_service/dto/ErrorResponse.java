@@ -1,4 +1,4 @@
-package com.anele.product_service.exception;
+package com.anele.product_service.dto;
 
 import java.time.LocalDateTime;
 

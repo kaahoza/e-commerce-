@@ -6,13 +6,13 @@ spring:
     name: product-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/product_catalog
+    url: jdbc:postgresql://localhost:5432/products_catalog
     username: postgres
     password: "Qhawe&Khanyisa_"
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:

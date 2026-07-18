@@ -1,23 +1,38 @@
 package com.anele.product_service.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+
 
 @Entity
-@NoArgsConstructor
+@Table(name = "products")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product {
-    public Long id;
-    public String name;
-    public String description;
-    public String category;
-    public String price;
-    public String status;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String sku;
+
+    @Column(nullable = false)
+    private String name;
+    private String description;
+
+    @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    @Column(name = "stock_quantity", nullable = false)
+    public Integer stockQuantity;
+
 }

@@ -1,4 +1,4 @@
-name: CI - E-commerce management
+name: Java CI/CD with maven
 
 on:
   push:

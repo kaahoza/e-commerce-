@@ -27,5 +27,5 @@ jobs:
           cache: 'maven'
 
       - name: Run Product Service Tests
-        working-directory: ./product-service
+        working-directory: ./e-commerce-
         run: mvn test

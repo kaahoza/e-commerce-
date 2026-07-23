@@ -1,4 +1,4 @@
-name: CI -  E-commerce management
+name: CI - E-commerce management
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  ci-pipeline:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'maven' # Automatically caches dependencies to speed up future runs
+          cache: 'maven'
 
       - name: Run tests
         run: mvn test
@@ -30,22 +30,8 @@ jobs:
           name: test-results
           path: "**/target/surefire-reports/**"
 
-  build:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven' # Reuses the cached dependencies from the test job
-
       - name: Build and Package Application
-        run: mvn clean package -DskipTests # Packages code into an executable JAR, skipping tests since they ran in the previous job
+        run: mvn package -DskipTests
 
       - name: Upload Executable JAR Artifact
         uses: actions/upload-artifact@v7

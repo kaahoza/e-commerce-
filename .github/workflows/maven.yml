@@ -18,20 +18,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'maven'
+          cache: 'maven' # Automatically caches dependencies to speed up future runs
 
       - name: Run tests
         run: mvn test
 
-      - name: Upload tests results
+      - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: test-results
-          path: target/surefire-repotrs/
+          path: target/surefire-reports/
 
   build:
-    runs-on: ubuntu latest
+    runs-on: ubuntu-latest
     needs: test
     steps:
       - name: Checkout repository
@@ -42,8 +42,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'maven'
+          cache: 'maven' # Reuses the cached dependencies from the test job
 
-      - name: Build with Maven
-        run: mvn clean compile
+      - name: Build and Package Application
+        run: mvn clean package -DskipTests # Packages code into an executable JAR, skipping tests since they ran in the previous job
 
+      - name: Upload Executable JAR Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ecommerce-application-jar
+          path: target/*.jar

@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: test-results
-          path: target/surefire-reports/
+          path: product-service/target/surefire-reports/
 
   build:
     runs-on: ubuntu-latest

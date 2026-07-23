@@ -28,4 +28,4 @@ jobs:
 
       - name: Run Product Service Tests
         working-directory: ./product-service
-        run: ./mvnw clean test
+        run: mvn test
